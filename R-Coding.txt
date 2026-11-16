@@ -1,0 +1,405 @@
+PROGRAM 1: Write a program to check whether a year (integer) entered by the user is a leap year or not.
+
+year <- as.integer(readline(prompt = "Enter a year to be checked: "))
+
+if ((year %% 4 == 0 && year %% 100 != 0) || (year %% 400 == 0)) {
+    print(paste(year, "is a leap year."))
+} else {
+    print(paste(year, "is not a leap year."))
+}
+
+
+PROGRAM 2: Write an R program to find the sum of natural numbers without formula using the if-else statement and the while loop.
+
+num <- as.integer(readline(prompt = "Enter a Number: "))
+
+if (num < 0) {
+    print("Enter a positive number.")
+} else {
+    sum <- 0
+
+    while (num > 0) {
+        sum <- sum + num
+        num = num - 1
+    }
+
+    print(paste("The sum of numbers upto the given limit is", sum))
+}
+
+
+PROGRAM 3: Write a program that prints the grades of the students according to the marks obtained.
+
+sub_marks <- c(57, 98, 59, 89, 78, 90, 57, 96, 45, 75)
+
+marks = sum(sub_marks)
+
+print(paste(marks, " is the total marks scored"))
+
+if (marks >= 800 && marks <= 1000) {
+    grade <- 'A+'
+} else {
+    if (marks >= 700 && marks <= 799) {
+        grade <- 'A'
+    } else {
+        if (marks >= 500 && marks <= 700) {
+            grade <- 'B+'
+        } else {
+            if (marks >= 400 && marks <= 500) {
+                grade <- 'B'
+            } else {
+                if (marks >= 150 && marks <= 400) {
+                    grade <- 'C'
+                } else {
+                    if (marks < 150) {
+                        grade <- 'D'
+                    }
+                }
+            }
+        }
+    }
+}
+
+print(paste(grade, "is the grade secured by the student"))
+
+
+PROGRAM 4: Write an R program to make a simple calculator that can add, subtract, multiply and divide using switch cases and functions.
+
+add <- function(x, y) {
+    return(x + y)
+}
+
+subtract <- function(x, y) {
+    return(x - y)
+}
+
+multiply <- function(x, y) {
+    return(x * y)
+}
+
+divide <- function(x, y) {
+    return(x / y)
+}
+
+print("Select operation.")
+print("1.Add")
+print("2.Subtract")
+print("3.Multiply")
+print("4.Divide")
+
+choice = as.integer(readline(prompt = "Enter choice[1/2/3/4:] "))
+
+num1 = as.integer(readline(prompt = "Enter first number: "))
+
+num2 = as.integer(readline(prompt = "Enter second number: "))
+
+operator <- switch(choice, "+", "-", "*", "/")
+
+result <- switch(
+    choice,
+    add(num1, num2),
+    subtract(num1, num2),
+    multiply(num1, num2),
+    divide(num1, num2)
+)
+
+print(paste(num1, operator, num2, "=", result))
+
+
+PROGRAM 5: Write a set of instructions to create the following matrix using vectors and rbind() function. Rename the rows to Lang1, Lang2 & Lang3 respectively and use the function to access any one element using row names.
+
+rowname <- "technology"
+
+colname <- "columns"
+
+a <- c('c#', 'java', 'COBOL', '.Net')
+
+b <- c('javascript', 'Nodejs', 'R', 'Azure')
+
+c <- c('Power BI', 'ASP.Net', 'Unity', 'Block chain')
+
+x <- rbind(a, b, c)
+
+print(x)
+
+rname <- c('Lang1', 'Lang2', 'Lang3')
+
+rownames(x) <- rname
+
+print(x)
+
+cat("\n\n The third element in the second row is \n")
+
+print(x["Lang2", 3])
+
+
+PROGRAM 6: Write the steps to import data from Excel to CSV files and apply data viewer functions like rm(), dim(), head(), tail(), sorting, filtering, searching to view few set of rows.
+
+if (!require("readxl")) install.packages("readxl")
+
+library(readxl)
+
+excel_data <- read_excel("dataset.xlsx", sheet = 1)
+
+write.csv(excel_data, "dataset.csv", row.names = FALSE)
+
+my_data <- read.csv("dataset.csv")
+
+print("--- Dimensions of Data ---")
+
+print(dim(my_data))
+
+print("--- First 5 Rows (Head) ---")
+
+print(head(my_data, n = 5))
+
+print("--- Last 5 Rows (Tail) ---")
+
+print(tail(my_data, n = 5))
+
+print("--- Sorted Data (by Age) ---")
+
+sorted_data <- my_data[order(my_data$Age), ]
+
+print(head(sorted_data, n = 5))
+
+print("--- Sorted Data (by Age Descending) ---")
+
+sorted_data <- my_data[order(-my_data$Age), ]
+
+print(head(sorted_data, n = 5))
+
+print("--- Filtered Data (Age > 30) ---")
+
+filtered_data <- subset(my_data, Age > 30)
+
+print(head(filtered_data, n = 5))
+
+print("--- Searching Data (Name contains 'John') ---")
+
+search_results <- my_data[grep("John", my_data$Name, ignore.case = TRUE), ]
+
+print(search_results)
+
+rm(excel_data, my_data, sorted_data, filtered_data, search_results)
+
+print("--- Active Objects in Workspace ---")
+
+print(ls())
+
+
+PROGRAM 7: Create a CSV file with 10 students name and marks. Find mean and median for the 10 student marks.
+
+student_names <- c(
+    "Amit", "Bhavna", "Chetan", "Divya", "Esha",
+    "Farhan", "Gita", "Hari", "Isha", "Jay"
+)
+
+student_marks <- c(85, 92, 78, 88, 95, 67, 84, 90, 73, 89)
+
+student_data <- data.frame(Name = student_names, Marks = student_marks)
+
+write.csv(student_data, "students_marks.csv", row.names = FALSE)
+
+print("--- CSV File 'students_marks.csv' Created Successfully ---")
+
+imported_data <- read.csv("students_marks.csv")
+
+print("--- Imported Student Data ---")
+
+print(imported_data)
+
+mean_value <- mean(imported_data$Marks)
+
+median_value <- median(imported_data$Marks)
+
+cat("\n--- Statistical Summary ---\n")
+
+cat("Mean Marks  :", mean_value, "\n")
+
+cat("Median Marks:", median_value, "\n")
+
+
+PROGRAM 8: Create a CSV file which contains 6 product names (product) and the units sold. Draw a pie chart for the data.
+
+product_names <- c(
+    "Laptops", "Smartphones", "Tablets",
+    "Headphones", "Smartwatches", "Monitors"
+)
+
+units_sold <- c(120, 250, 90, 180, 150, 60)
+
+sales_data <- data.frame(Product = product_names, Units_Sold = units_sold)
+
+write.csv(sales_data, "product_sales.csv", row.names = FALSE)
+
+print("--- CSV File 'product_sales.csv' Created Successfully ---")
+
+imported_sales <- read.csv("product_sales.csv")
+
+percentages <- round(
+    100 * imported_sales$Units_Sold / sum(imported_sales$Units_Sold),
+    1
+)
+
+pie_labels <- paste(imported_sales$Product, "-", percentages, "%")
+
+chart_colors <- c(
+    "#4D4D4D", "#5DA5DA", "#FAA43A",
+    "#60BD68", "#F17CB0", "#B276B2"
+)
+
+pie(
+    imported_sales$Units_Sold,
+    labels = pie_labels,
+    col = chart_colors,
+    main = "Product Sales Distribution (Units Sold)",
+    init.angle = 90
+)
+
+
+PROGRAM 9: Write an R program to implement Linear Regression for the sample dataset and display the summary of the regression model.
+
+data(cars)
+
+model <- lm(dist ~ speed, data = cars)
+
+summary(model)
+
+
+PROGRAM 10: Write an R program to perform K-Means Clustering for the sample dataset using 2 clusters.
+
+data(iris)
+
+set.seed(123)
+
+iris_data <- iris[, 1:2]
+
+kmeans_result <- kmeans(iris_data, centers = 2, nstart = 20)
+
+print(kmeans_result)
+
+plot(
+    iris_data,
+    col = kmeans_result$cluster,
+    main = "K-Means Clustering (2 Clusters)"
+)
+
+points(kmeans_result$centers, col = 1:2, pch = 8, cex = 2)
+
+
+PROGRAM 11: Write a R program to prepare a Histogram for the given set of data. (19, 23, 11, 5, 16, 21, 32, 14, 19, 27, 39)
+
+v <- c(19, 23, 11, 5, 16, 21, 32, 14, 19, 27, 39)
+
+hist(
+    v,
+    main = "Histogram of Given Data",
+    xlab = "No.of Articles",
+    ylab = "Frequency",
+    col = "blue",
+    border = "black"
+)
+
+
+PROGRAM 12: Write a R program to prepare a bar chart for the given set of data. Create a CSV file for monthly sales which contains two columns months (Jan, Feb, Mar, Apr, May) and Profit (72, 80, 87, 90, 89).
+
+sales_data <- data.frame(
+    months = c("Jan", "Feb", "Mar", "Apr", "May"),
+    Profit = c(72, 80, 87, 90, 89)
+)
+
+write.csv(sales_data, "monthlysales.csv", row.names = FALSE)
+
+data <- read.csv("monthlysales.csv")
+
+barplot(
+    height = data$Profit,
+    names.arg = data$months,
+    col = "pink",
+    main = "Monthly Sales Profit",
+    xlab = "Months",
+    ylab = "Profit (in thousands)",
+    border = "red",
+    ylim = c(0, 100)
+)
+
+
+PROGRAM 13: Write an R program to perform Principal Component Analysis (PCA) on the first four columns of the mtcars dataset and display the summary.
+
+mtcars_subset <- mtcars[, 1:4]
+
+pca_result <- prcomp(mtcars_subset, scale = TRUE)
+
+summary(pca_result)
+
+
+PROGRAM 14: Write an R program using SparkR to create a Spark session, convert the faithful dataset into a Spark DataFrame, and display the first few rows.
+
+install.packages("sparklyr")
+
+library(sparklyr)
+
+library(SparkR)
+
+sparkR.session(appName = "SparkR_Faithful_Example")
+
+spark_df <- createDataFrame(faithful)
+
+head(spark_df)
+
+sparkR.session.stop()
+
+
+PROGRAM 15: Write an R program to predict future sales using Linear Regression for the following sales data.
+
+months <- c(1, 2, 3, 4, 5)
+
+sales <- c(120, 150, 170, 210, 250)
+
+sales_data <- data.frame(Month = months, Sales = sales)
+
+model <- lm(Sales ~ Month, data = sales_data)
+
+print(summary(model))
+
+future_months <- data.frame(Month = c(6, 7, 8))
+
+predictions <- predict(model, newdata = future_months)
+
+future_sales_results <- data.frame(
+    Month = future_months$Month,
+    Predicted_Sales = predictions
+)
+
+print(future_sales_results)
+
+plot(
+    sales_data$Month,
+    sales_data$Sales,
+    main = "Sales Prediction using Linear Regression",
+    xlab = "Month",
+    ylab = "Sales",
+    col = "blue",
+    pch = 16,
+    cex = 1.5,
+    xlim = c(1, 9),
+    ylim = c(100, 350)
+)
+
+abline(model, col = "red", lwd = 2)
+
+points(
+    future_months$Month,
+    predictions,
+    col = "darkgreen",
+    pch = 17,
+    cex = 1.5
+)
+
+legend(
+    "topleft",
+    legend = c("Actual Data", "Regression Line", "Predicted Data"),
+    col = c("blue", "red", "darkgreen"),
+    pch = c(16, NA, 17),
+    lty = c(NA, 1, NA)
+)
